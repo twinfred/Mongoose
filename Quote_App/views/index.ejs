@@ -11,6 +11,13 @@
 <body>
     <h1>Quote App</h1>
     <p>Add your favorite quote to the DB using the form below.</p>
+    <% if(messages) { %>
+        <ul>
+        <% for (var x in messages.add_quote) { %>
+            <li><%= messages.add_quote[x] %></li>
+        <% } %>
+        </ul>
+    <% } %>
     <form action="/add_quote" method="post">
         <table>
             <tbody>

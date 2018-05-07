@@ -10,6 +10,13 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/static'));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({
+    secret: 'keyboardkitteh',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }
+}))
+app.use(flash());
 
 // CONNECTING 'QUOTING_DOJO' SCHEMA
 mongoose.connect('mongodb://localhost/quoting_dojo;)');
@@ -42,10 +49,14 @@ app.post('/add_quote', function(req, res){
     Quote.create(req.body, function(err, result){
         if(err){
             console.log(err);
+            for(var x in err.errors){
+                req.flash('add_quote', err.errors[x].message);
+            }
             res.redirect('/');
+        }else{
+            console.log("RESULT:", result);
+            res.redirect('/quotes');    
         }
-        console.log("RESULT:", result);
-        res.redirect('/quotes');
     })
 });
 
