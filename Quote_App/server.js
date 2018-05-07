@@ -40,7 +40,7 @@ app.get('/quotes', function(req, res){
             console.log(err)
         }
         res.render('quotes', {quotes: quotes});
-    })
+    }).sort({createdAt: -1})
 });
 
 // POST ROUTES
