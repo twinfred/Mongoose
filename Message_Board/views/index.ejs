@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Message Board</title>
+</head>
+<body>
+    <h1>Message Board</h1>
+    <hr>
+    <h2>Add a Message:</h2>
+    <% if(messages) { %>
+        <ul>
+        <% for (var x in messages.add_post) { %>
+            <li><%= messages.add_post[x] %></li>
+        <% } %>
+        </ul>
+    <% } %>
+    <form action="/add_message" method="post">
+        <table>
+            <tr>
+                <td>Name:</td>
+            </tr>
+            <tr>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>Message:</td>
+            </tr>
+            <tr>
+                <td><textarea name="message" cols="60" rows="10"></textarea></td>
+            </tr>
+        </table>
+        <input type="submit" value="Post Message">
+    </form>
+    <hr>
+    <% if(posts){ %>
+        <% for(var x in posts){ %>
+            <h3>Name: <%= posts[x].name %></h3>
+            <h3>Message: <%= posts[x].message %></h3>
+            <% for(var y in posts[x].post_comments){ %>
+                <% if(posts[x].post_comments[y].comment){ %>
+                    <p>Name: <%= posts[x].post_comments[y].name %></p>
+                    <p>Message: <%= posts[x].post_comments[y].comment %></p>
+                <% } %>
+            <% } %>
+            <form action="<%= '/add_comment/'+posts[x]._id %>" method="post">
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="name"></td>
+                    </tr>
+                    <tr>
+                        <td>Message:</td>
+                    </tr>
+                    <tr>
+                        <td><textarea name="comment" cols="60" rows="5"></textarea></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Add Comment">
+            </form>
+            <hr>
+        <% } %>
+    <% } %>
+</body>
+</html>
