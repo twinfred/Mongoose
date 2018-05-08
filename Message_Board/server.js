@@ -31,7 +31,7 @@ const postSchema = new mongoose.Schema({
     post_comments: [commentSchema],
 }, {timestamps: true});
 
-// CONNECTING 'QUOTE' COLLECTION
+// CONNECTING COLLECTIONS
 mongoose.model('post_comments', commentSchema);
 const Comment = mongoose.model('post_comments');
 
