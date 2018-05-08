@@ -8,15 +8,18 @@
 </head>
 <body>
     <h1>Message Board</h1>
-    <hr>
-    <h2>Add a Message:</h2>
     <% if(messages) { %>
         <ul>
         <% for (var x in messages.add_post) { %>
             <li><%= messages.add_post[x] %></li>
         <% } %>
+        <% for (var x in messages.add_post) { %>
+            <li><%= messages.add_post[x] %></li>
+        <% } %>
         </ul>
     <% } %>
+    <hr>
+    <h2>Add a Message:</h2>
     <form action="/add_message" method="post">
         <table>
             <tr>
