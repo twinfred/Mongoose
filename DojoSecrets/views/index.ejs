@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LOGIN / REGISTRATION</title>
+</head>
+<body>
+    <% if(messages.error) { %>
+        <p>Error(s):</p>
+        <ul>
+        <% for (var x in messages.error) { %>
+            <li><%= messages.error[x] %></li>
+        <% } %>
+        </ul>
+    <% } %>
+    <h2>Login</h2>
+    <form action="/login" method="post">
+        <table>
+            <tr>
+                <td>Email: </td>
+                <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Login">
+    </form>
+    <h2>Register</h2>
+    <form action="/register" method="post">
+        <table>
+            <tr>
+                <td>Email: </td>
+                <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+                <td>First Name: </td>
+                <td><input type="text" name="first_name"></td>
+            </tr>
+            <tr>
+                <td>Last Name: </td>
+                <td><input type="text" name="last_name"></td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td>Confirm Password: </td>
+                <td><input type="password" name="passwordConf"></td>
+            </tr>
+            <tr>
+                <td>Birthday: </td>
+                <td><input type="date" name="birthday"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
