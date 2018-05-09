@@ -160,24 +160,24 @@ module.exports = {
             if(err){
                 for(var x in err.errors){
                     req.flash('error', err.errors[x].message);
-                    return res.redirect('/secret/'+req.params.secret_id);
+                    return res.redirect('/');
                 }
             }else{
                 Secret.update({_id: req.params.secret_id}, {$push: {comments: comment}}, (err, secret)=>{
                     if(err){
                         for(var x in err.errors){
                             req.flash('error', err.errors[x].message);
-                            return res.redirect('/secret/'+req.params.secret_id);
+                            return res.redirect('/');
                         }
                     }else{
-                        User.update({_id: req.session.user_id}, {$push: {comments: comment}}, (req, res)=>{
+                        User.update({_id: req.session.user_id}, {$push: {comments: comment}}, (err, user)=>{
                             if(err){
                                 for(var x in err.errors){
                                     req.flash('error', err.errors[x].message);
-                                    return res.redirect('/secret/'+req.params.secret_id);
+                                    return res.redirect('/');
                                 }
                             }else{
-                                return res.redirect('/secret/'+req.params.secret_id);
+                                return res.redirect('/');
                             }
                         })
                     }
@@ -190,14 +190,14 @@ module.exports = {
             if(err){
                 for(var x in err.errors){
                     req.flash('error', err.errors[x].message);
-                    return res.redirect('/secret/'+req.params.secret_id);
+                    return res.redirect('/');
                 }
             }else{
                 User.update({_id: req.session.user_id}, {$pull: {secrets: secret}}, (err, user)=>{
                     if(err){
                         for(var x in err.errors){
                             req.flash('error', err.errors[x].message);
-                            return res.redirect('/secret/'+req.params.secret_id);
+                            return res.redirect('/');
                         }
                     }else{
                         Secret.remove({_id: req.params.secret_id}, (err)=>{

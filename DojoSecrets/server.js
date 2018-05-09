@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('express-flash');
 
@@ -18,10 +17,7 @@ app.use(session({
 }))
 
 // MONGOD DATABASE
-mongoose.connect('mongodb://localhost/dojo_secrets');
-require('./server/models/comment');
-require('./server/models/secret');
-require('./server/models/user');
+require('./server/config/mongoose');
 
 // ROUTES
 require('./server/config/routes.js')(app);
