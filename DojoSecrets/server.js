@@ -19,29 +19,9 @@ app.use(session({
 
 // MONGOD DATABASE
 mongoose.connect('mongodb://localhost/dojo_secrets');
-
-var commentSchema = new mongoose.Schema({
-    content: {type: String, required: [true, "Your secret can't be blank."]},
-}, {timestamps: true});
-
-var secretSchema = new mongoose.Schema({
-    content: {type: String, required: [true, "Your secret can't be blank."]},
-    comments: [commentSchema],
-}, {timestamps: true});
-
-var userSchema = new mongoose.Schema({
-    email: {type: String, required: [true, "An email is required."]},
-    first_name: {type: String, required: [true, "A first name is required."], minlength: [2, "Your first name is too short."]},
-    last_name: {type: String, required: [true, "A last name is required."], minlength: [2, "Your last name is too short."]},
-    birthday: {type: String, required: [true, "A birthday is required."]},
-    password: String,
-    secrets: [secretSchema],
-    comments: [commentSchema],
-}, {timestamps: true});
-
-const Comment = mongoose.model('comments', secretSchema);
-const Secret = mongoose.model('secrets', secretSchema);
-const User = mongoose.model('users', userSchema);
+require('./server/models/comment');
+require('./server/models/secret');
+require('./server/models/user');
 
 // ROUTES
 require('./server/config/routes.js')(app);

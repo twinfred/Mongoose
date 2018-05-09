@@ -1,4 +1,4 @@
-const controller = require('./../controllers/controller')
+const controller = require('./../controllers/controllers')
 
 module.exports = function(app){
     app.get('/', controller.index); // LOGIN / REG PAGE
